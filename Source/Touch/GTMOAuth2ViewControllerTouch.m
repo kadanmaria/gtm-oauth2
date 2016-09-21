@@ -49,10 +49,6 @@ static GTMOAuth2Keychain* gGTMOAuth2DefaultKeychain = nil;
 @synthesize request = request_,
             systemCookies = systemCookies_,
             signInCookies = signInCookies_,
-            backButton = backButton_,
-            forwardButton = forwardButton_,
-            navButtonsView = navButtonsView_,
-            rightBarButtonItem = rightBarButtonItem_,
             webView = webView_,
             initialActivityIndicator = initialActivityIndicator_;
 
@@ -220,11 +216,7 @@ static GTMOAuth2Keychain* gGTMOAuth2DefaultKeychain = nil;
 - (void)dealloc {
   [webView_ setDelegate:nil];
 
-  [backButton_ release];
-  [forwardButton_ release];
   [initialActivityIndicator_ release];
-  [navButtonsView_ release];
-  [rightBarButtonItem_ release];
   [webView_ stopLoading];
   [webView_ release];
   [signIn_ release];
@@ -381,8 +373,6 @@ static GTMOAuth2Keychain* gGTMOAuth2DefaultKeychain = nil;
 }
 
 - (void)setUpNavigation {
-  rightBarButtonItem_.customView = navButtonsView_;
-  self.navigationItem.rightBarButtonItem = rightBarButtonItem_;
 }
 
 - (void)popView {
@@ -814,8 +804,6 @@ static Class gSignInClass = Nil;
 }
 
 - (void)updateUI {
-  [backButton_ setEnabled:[[self webView] canGoBack]];
-  [forwardButton_ setEnabled:[[self webView] canGoForward]];
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView {
